@@ -22,18 +22,21 @@ public class ConsoleDaoJdbcTemplateImpl implements ConsoleDao {
     }
 
     private static final String INSERT_CONSOLE_SQL =
-            "insert into console (model, manufacturer, memoryAmount, processor, price, quantity) values (?, ?, ?, ?, ?, ?)";
+            "insert into console (model, manufacturer, memory_amount, processor, price, quantity) values (?, ?, ?, ?, ?, ?)";
 
     private static final String SELECT_CONSOLE_SQL =
             "select * from console where game_id = ?";
+
+    private static final String SELECT_ALL_CONSOLES_BY_MANUFACTURER_SQL =
+            "select * from console where manufacturer = ?";
 
     private static final String SELECT_ALL_CONSOLES_SQL =
             "select * from console";
 
     private static final String UPDATE_CONSOLE_SQL =
-            "update console set model = ?, manufacturer = ?, memoryAmount = ?, processor = ?, price = ?, quantity = ? where customer_id = ?";
+            "update console set model = ?, manufacturer = ?, memory_amount = ?, processor = ?, price = ?, quantity = ? where game_id = ?";
 
-    private static final String DELETE_CONSOLE =
+    private static final String DELETE_CONSOLE_SQL =
             "delete from console where game_id = ?";
 
     private Console mapRowToConsole(ResultSet rs, int rowNum) throws SQLException {
@@ -41,8 +44,8 @@ public class ConsoleDaoJdbcTemplateImpl implements ConsoleDao {
         console.setGameId(rs.getInt("game_id"));
         console.setModel(rs.getString("model"));
         console.setManufacturer(rs.getString("manufacturer"));
-        console.setMemoryAmount(rs.getString("memoryAmount"));
-        console.setProcesser(rs.getString("processor"));
+        console.setMemoryAmount(rs.getString("memory_amount"));
+        console.setProcessor(rs.getString("processor"));
         console.setPrice(rs.getBigDecimal("price"));
         console.setQuantity(rs.getInt("quantity"));
 
@@ -56,7 +59,7 @@ public class ConsoleDaoJdbcTemplateImpl implements ConsoleDao {
                 console.getModel(),
                 console.getManufacturer(),
                 console.getMemoryAmount(),
-                console.getProcesser(),
+                console.getProcessor(),
                 console.getPrice(),
                 console.getQuantity());
         int id = jdbcTemplate.queryForObject("select LAST_INSERT_ID()", Integer.class);
@@ -80,7 +83,7 @@ public class ConsoleDaoJdbcTemplateImpl implements ConsoleDao {
                 console.getModel(),
                 console.getManufacturer(),
                 console.getMemoryAmount(),
-                console.getProcesser(),
+                console.getProcessor(),
                 console.getPrice(),
                 console.getQuantity(),
                 console.getGameId());
@@ -88,16 +91,17 @@ public class ConsoleDaoJdbcTemplateImpl implements ConsoleDao {
 
     @Override
     public void deleteConsole(int id) {
+        jdbcTemplate.update(DELETE_CONSOLE_SQL, id);
 
     }
 
     @Override
     public List<Console> getAllConsoles() {
-        return null;
+        return jdbcTemplate.query(SELECT_ALL_CONSOLES_SQL, this::mapRowToConsole);
     }
 
     @Override
     public List<Console> getConsolesByManufacturer(String manufacturer) {
-        return null;
+        return jdbcTemplate.query(SELECT_ALL_CONSOLES_BY_MANUFACTURER_SQL, this::mapRowToConsole, manufacturer);
     }
 }

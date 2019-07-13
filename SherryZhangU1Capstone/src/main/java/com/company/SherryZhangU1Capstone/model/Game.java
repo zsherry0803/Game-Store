@@ -18,7 +18,7 @@ public class Game {
     private String description;
     private BigDecimal price;
     private String studio;
-    private Integer quantity;
+    private int quantity;
 
 
     public int getGameId() {
@@ -69,11 +69,11 @@ public class Game {
         this.studio = studio;
     }
 
-    public Integer getQuantity() {
+    public int getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(Integer quantity) {
+    public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
 
@@ -83,12 +83,12 @@ public class Game {
         if (!(o instanceof Game)) return false;
         Game game = (Game) o;
         return gameId == game.gameId &&
+                quantity == game.quantity &&
                 title.equals(game.title) &&
                 ersbRating.equals(game.ersbRating) &&
                 description.equals(game.description) &&
                 price.equals(game.price) &&
-                studio.equals(game.studio) &&
-                Objects.equals(quantity, game.quantity);
+                studio.equals(game.studio);
     }
 
     @Override

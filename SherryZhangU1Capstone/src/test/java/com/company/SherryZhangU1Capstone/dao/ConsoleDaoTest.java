@@ -34,7 +34,7 @@ public class ConsoleDaoTest {
         console.setManufacturer("SE");
         console.setMemoryAmount("1024");
         console.setModel("bash");
-        console.setPrice(BigDecimal.valueOf(3.20));
+        console.setPrice(new BigDecimal("3.2").setScale(2));
         console.setQuantity(11);
 
         console = consoleDao.addConsole(console);
@@ -53,8 +53,9 @@ public class ConsoleDaoTest {
         console.setManufacturer("SE");
         console.setMemoryAmount("1024");
         console.setModel("bash");
-        console.setPrice(BigDecimal.valueOf(3.20));
+        console.setPrice(new BigDecimal("3.2").setScale(2));
         console.setQuantity(11);
+        console.setProcessor("");
 
         console = consoleDao.addConsole(console);
         console.setModel("OSX");
@@ -71,7 +72,7 @@ public class ConsoleDaoTest {
         console.setManufacturer("SE");
         console.setMemoryAmount("1024");
         console.setModel("bash");
-        console.setPrice(BigDecimal.valueOf(3.20));
+        console.setPrice(new BigDecimal("3.2").setScale(2));
         console.setQuantity(11);
 
         consoleDao.addConsole(console);

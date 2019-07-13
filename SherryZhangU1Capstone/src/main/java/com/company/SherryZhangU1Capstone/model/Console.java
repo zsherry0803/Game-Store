@@ -16,9 +16,9 @@ public class Console {
     private String model;
     private String manufacturer;
     private String memoryAmount;
-    private String processer;
+    private String processor;
     private BigDecimal price;
-    private Integer quantity;
+    private int quantity;
 
 
     public int getGameId() {
@@ -53,12 +53,12 @@ public class Console {
         this.memoryAmount = memoryAmount;
     }
 
-    public String getProcesser() {
-        return processer;
+    public String getProcessor() {
+        return processor;
     }
 
-    public void setProcesser(String processer) {
-        this.processer = processer;
+    public void setProcessor(String processor) {
+        this.processor = processor;
     }
 
     public BigDecimal getPrice() {
@@ -69,11 +69,11 @@ public class Console {
         this.price = price;
     }
 
-    public Integer getQuantity() {
+    public int getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(Integer quantity) {
+    public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
 
@@ -83,16 +83,16 @@ public class Console {
         if (!(o instanceof Console)) return false;
         Console console = (Console) o;
         return gameId == console.gameId &&
+                quantity == console.quantity &&
                 model.equals(console.model) &&
                 manufacturer.equals(console.manufacturer) &&
                 Objects.equals(memoryAmount, console.memoryAmount) &&
-                Objects.equals(processer, console.processer) &&
-                price.equals(console.price) &&
-                quantity.equals(console.quantity);
+                Objects.equals(processor, console.processor) &&
+                price.equals(console.price);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(gameId, model, manufacturer, memoryAmount, processer, price, quantity);
+        return Objects.hash(gameId, model, manufacturer, memoryAmount, processor, price, quantity);
     }
 }
