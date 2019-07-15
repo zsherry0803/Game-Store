@@ -6,18 +6,9 @@ import java.util.Objects;
 //product_type varchar(20) not null,
 //        fee decimal (4,2)
 public class ProcessingFee {
-    private int ixProductTypeFee;
+
     private String productType;
     private BigDecimal fee;
-
-
-    public int getIxProductTypeFee() {
-        return ixProductTypeFee;
-    }
-
-    public void setIxProductTypeFee(int ixProductTypeFee) {
-        this.ixProductTypeFee = ixProductTypeFee;
-    }
 
     public String getProductType() {
         return productType;
@@ -40,13 +31,12 @@ public class ProcessingFee {
         if (this == o) return true;
         if (!(o instanceof ProcessingFee)) return false;
         ProcessingFee that = (ProcessingFee) o;
-        return Objects.equals(ixProductTypeFee, that.ixProductTypeFee) &&
-                Objects.equals(productType, that.productType) &&
-                fee.equals(that.fee);
+        return productType.equals(that.productType) &&
+                Objects.equals(fee, that.fee);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(ixProductTypeFee, productType, fee);
+        return Objects.hash(productType, fee);
     }
 }

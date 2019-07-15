@@ -6,18 +6,11 @@ import java.util.Objects;
 //state char(2) not null,
 //        rate decimal(3,2) not null
 public class SalesTaxRate {
-    private int ix_state_rate;
+
     private String state;
     private BigDecimal rate;
 
 
-    public int getIx_state_rate() {
-        return ix_state_rate;
-    }
-
-    public void setIx_state_rate(int ix_state_rate) {
-        this.ix_state_rate = ix_state_rate;
-    }
 
     public String getState() {
         return state;
@@ -40,13 +33,12 @@ public class SalesTaxRate {
         if (this == o) return true;
         if (!(o instanceof SalesTaxRate)) return false;
         SalesTaxRate that = (SalesTaxRate) o;
-        return ix_state_rate == that.ix_state_rate &&
-                state.equals(that.state) &&
+        return state.equals(that.state) &&
                 rate.equals(that.rate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(ix_state_rate, state, rate);
+        return Objects.hash( state, rate);
     }
 }
