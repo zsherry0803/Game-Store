@@ -57,7 +57,7 @@ public class InvoiceDaoTest {
         Game game = new Game();
         game.setDescription("good game");
         game.setErsbRating("M18+");
-        game.setPrice(new BigDecimal("12.00").setScale(2));
+        game.setPrice(new BigDecimal("12").setScale(2));
         game.setStudio("SE");
         game.setTitle("FF 14");
         game.setQuantity(50);
@@ -73,12 +73,13 @@ public class InvoiceDaoTest {
         invoice.setItemType(processingFee.getProductType());
         invoice.setProcessingFee(processingFee.getFee());
         invoice.setState(salesTaxRate.getState());
-        invoice.setTax(salesTaxRate.getRate());
+
 
         invoice.setQuantity(30);
         invoice.setUnitPrice(game.getPrice());
         invoice.setSubtotal(invoice.getUnitPrice().multiply(BigDecimal.valueOf(invoice.getQuantity())));
-        invoice.setTotal(invoice.getSubtotal().add(invoice.getTax().add(invoice.getProcessingFee())));
+        invoice.setTax(salesTaxRate.getRate().multiply(invoice.getSubtotal()).setScale(2));
+        invoice.setTotal(invoice.getSubtotal().add(invoice.getProcessingFee()).add(invoice.getTax()).setScale(2));
 
         invoice = invoiceDao.addInvoice(invoice);
         Invoice invoice1 = invoiceDao.getInvoice(invoice.getInvoiceId());
